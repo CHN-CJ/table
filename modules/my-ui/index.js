@@ -3,7 +3,7 @@ import MyTable from './MyTable/MyTable.vue';
 const components = {
     //es6语法
     //key与value一样
-    //可以写成MyTable
+    //可以写成 MyTable
     'MyTable': MyTable
 }
 

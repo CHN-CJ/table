@@ -1,4 +1,6 @@
 <template>
+  // 向组件中传值
+  // 注册事件，子组件可以接收并传递参数给父组件
   <my-table
     :data="tableData"
     @submit="editData"
@@ -9,6 +11,13 @@
   // import MyTable from '../modules/my-ui/MyTable'
   import { ref } from 'vue';
 
+  //包裹对象
+  /**
+   * tableData: {
+   *  tHead:[{}，{}],
+   *  tBody:[{}，{}]
+   * }
+   */
   const tableData = ref({
     tHead: [
       {
@@ -70,8 +79,12 @@
     ]
   })
 
-  const editData = ({ index, key, value, text }) => {
+  //需要传递的参数
+  //传递函数
+  const editData = ({ index, key, value, text }, removeInput) => {
     if (tableData.value.tBody[index][key] !== value) {
+      // 含有确定或取消的弹框
+      // 会返回 true 或 false3
       const cfm = window.confirm(`
         确定要将数据下标为【${ index }】项
         【${ text }】字段的内容修改为【${ value }】吗？
@@ -82,6 +95,8 @@
           index === idx && (item[key] = value);
           return item;
         })
+       } else {
+          removeInput();
        }
     }
   }
